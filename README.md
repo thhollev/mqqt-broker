@@ -1,9 +1,9 @@
-# mqqt-broker
-a python mosquitto(mqqt) broker
-USAGE:
+# mqqt-broker    
+A python mosquitto(mqqt) broker.        
 
-#./get.py \<ip>
-This will start the broker and listen for incoming messages
+#USAGE:     
+##./get.py \<ip>      
+This will start the broker and listen for incoming messages   
 
-#./send.py \<ip> \<message>
-This will send the a message
+##./send.py \<ip> \<message>   
+This will send the a message   
