@@ -6,4 +6,3 @@ A python mosquitto(mqqt) broker.
 This will start the broker and listen for incoming messages   
 
 ###./send.py \<ip> \<message>   
-This will send the a message   
