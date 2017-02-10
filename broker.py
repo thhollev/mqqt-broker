@@ -17,20 +17,19 @@ def stop_broker():
 
 def on_connect(client, userdata, flags, rc):
     if(rc == 0):
-        print("Connectin established! rcode("+str(rc)+")")
-        client.subscribe("temp")
+        print("Connecting established! rcode("+str(rc)+")")
+        for topics in sys.argv[2].split(", "):
+            print("Subscribed to "+topics)
+            client.subscribe(topics)
 
 
 def on_message(client, userdata, msg):
-    print(msg.payload.decode("utf-8"))
-    target = open("temp.dat", 'w')
-    target.write(msg.payload.decode("utf-8"))
-    target.close()
+    print(msg.topic+": \""+msg.payload.decode("utf-8").replace(" ", "")+"\"")
 
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: "+sys.argv[0]+" <ip>")
+    if len(sys.argv) != 3:
+        print("Usage: "+sys.argv[0]+" <ip> <topics>")
     else:
         try:
             start_broker()
@@ -38,7 +37,6 @@ def main():
             client.on_connect = on_connect
             client.on_message = on_message
             client.connect(str(sys.argv[1]), 1883, 60)
-            client.publish("temp", "online")
             client.loop_forever()
         except KeyboardInterrupt:
             stop_broker()

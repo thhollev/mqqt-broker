@@ -4,9 +4,10 @@ import paho.mqtt.publish as publish
 import sys
 
 def POST():
-	if len(sys.argv) != 3:
-		print("Usage: "+sys.argv[0]+" <ip> <message>")
-	else:
-		publish.single("temp", str(sys.argv[2]), hostname=str(sys.argv[1]))
+	publish.single(str(sys.argv[2]), str(sys.argv[3]), hostname=str(sys.argv[1]))
 
-POST()
+if __name__ == '__main__':
+	if len(sys.argv) != 4:
+		print("Usage: "+sys.argv[0]+" <ip> <topic> <message>")
+	else:
+		POST()
